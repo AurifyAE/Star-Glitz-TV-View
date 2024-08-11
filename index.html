@@ -8,11 +8,11 @@
   <title>
     STAR GLITZ
   </title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
   <!-- Link Bootstrap CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <!--     Fonts and icons     -->
   <script src="https://kit.fontawesome.com/0e1fa7c1a3.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
@@ -21,7 +21,7 @@
       padding: 20px 20px;
       font-family: "arial", heletica, sans-serif;
       font-size: 24px;
-/*       background: url('./Red-Background.jpg'); */
+      /*       background: url('./Red-Background.jpg'); */
       background-color: black;
       background-repeat: no-repeat;
       background-size: cover;
@@ -104,7 +104,7 @@
     /* .card-table tbody td {} */
     .card-table th,
     .card-table td {
-      padding: 7px;
+      padding: 5px;
       text-align: center;
     }
 
@@ -279,7 +279,7 @@
     <div class="col-lg-6" style="display: flex; flex-direction: column;">
       <div style="display: flex; flex-direction: row; justify-content: space-between;">
         <div>
-          <img class="logo" src="./star-glitz.png" alt="" style="width: 270px; margin-top: -30px; margin-left: 0px;">
+          <img class="logo" src="./star-glitz.png" alt="" style="width: 200px; margin-top: -30px; margin-left: 0px;">
         </div>
 
         <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
@@ -308,21 +308,30 @@
               <th>BID (<span id="currencySymbol">AED</span>)</th>
               <th>ASK (<span id="currencySymbol">AED</span>)</th>
             </tr>
-            <tr id="blankTr" style="height: 15px;"></tr>
+            <tr id="blankTr" style="height: 10px;"></tr>
           </thead>
 
           <tbody id="tableBodyTV">
             <!-- Table body content will be dynamically updated here -->
           </tbody>
-          <!-- <tbody class="silver-table">
-            <tr>
-              <td style="text-align: right;">Silver</td>
-              <td style="text-align: left; font-size:28px;" >999</td>
+          <tbody class="silver-table">
+            <tr id="blankTr" style="height: 7px; border: none;"></tr>
+            <tr style="border: 3px solid #CAA462;">
+              <td style="text-align: right;">Copper</td>
+              <td style="text-align: left; font-size:28px;"></td>
               <td>1 KG</td>
-              <td id="silverBidTd"></td>
-              <td id="silverAskTd"></td>
+              <td id="copperBidTd"></td>
+              <td id="copperAskTd"></td>
             </tr>
-          </tbody> -->
+            <tr id="blankTr" style="height: 7px; border: none;"></tr>
+            <tr style="border: 3px solid #CAA462;">
+              <td style="text-align: right;">Platinum</td>
+              <td style="text-align: left; font-size:28px;"></td>
+              <td>1 KG</td>
+              <td id="platinumBidTd"></td>
+              <td id="platinumAskTd"></td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
@@ -434,7 +443,7 @@
   </script>
   <script>
     let currentIndex = 0;
-    const images = ['./assets/images/image1.jpg', './assets/images/image2.jpg', './assets/images/image3.jpeg']; // Add your image URLs here
+    const images = ['./assets/images/image1.jpg', './assets/images/image2.webp', './assets/images/image3.jpeg', './assets/images/image4.jpg']; // Add your image URLs here
     // assets\images\image1.jpg
     function showImage() {
       const carouselImage = document.getElementById("carouselImage");
@@ -459,10 +468,10 @@
   <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js"></script>
+  <script type="module" defer src="./assets/js/core/aurifyview2.js"></script>
   <script type="module" src="./config/db.js"></script>
   <script type="module" src="./assets/js/core/spotrateDB.js"></script>
   <script type="module" defer src="./assets/js/core/displayNews.js"></script>
-  <script type="module" defer src="./assets/js/core/aurifyview2.js"></script>
 </body>
 
 </html>
