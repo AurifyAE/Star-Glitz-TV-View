@@ -29,6 +29,7 @@ setInterval(() => {
     fetchData()
 }, 500)
 
+// fetchData()
 showTable();
 
 
@@ -42,13 +43,15 @@ let copperData = {}
 let platinumData = {}
 
 async function fetchData() {
+    console.log('ll');
+    let value, value2, value3, value4;
+
     socket.on('market-data', (data) => {
         // console.log('Received gold value:', data);
 
         if (data && data.symbol) {
             if (data.symbol === "Gold") {
                 goldData = data;
-                // updateGoldUI();
             } else if (data.symbol === "Silver") {
                 silverData = data;
             } else if (data.symbol === "Copper") {
@@ -59,28 +62,27 @@ async function fetchData() {
         } else {
             console.warn("Received malformed market data:", data);
         }
-
-
-        const value = goldData.bid;
-        goldHigh = goldData.high;
-        goldLow = goldData.low;
-        goldBuy = (value + bidSpread).toFixed(2);
-        goldSell = (value + bidSpread + askSpread + parseFloat(0.5)).toFixed(2);
-
-        const value2 = silverData.bid;
-        silverHigh = silverData.high;
-        silverLow = silverData.low;
-        silverBuy = (value2 + silverBidSpread).toFixed(2);
-        silverSell = (value2 + silverBidSpread + silverAskSpread + parseFloat(0.5)).toFixed(2);
-
-        const value3 = copperData.bid;
-        copperBuy = (value3).toFixed(2);
-        copperSell = (value3 + parseFloat(0.5)).toFixed(2);
-
-        const value4 = platinumData.bid;
-        platinumBuy = (value4).toFixed(2);
-        platinumSell = (value4 + parseFloat(0.5)).toFixed(2);
     });
+ value = goldData.bid;
+    goldHigh = goldData.high;
+    goldLow = goldData.low;
+    goldBuy = (value + bidSpread).toFixed(2);
+    goldSell = (value + bidSpread + askSpread + parseFloat(0.5)).toFixed(2);
+
+    value2 = silverData.bid;
+    silverHigh = silverData.high;
+    silverLow = silverData.low;
+    silverBuy = (value2 + silverBidSpread).toFixed(2);
+    silverSell = (value2 + silverBidSpread + silverAskSpread + parseFloat(0.5)).toFixed(2);
+    value3 = copperData.bid;
+    copperBuy = (value3).toFixed(2);
+    copperSell = (value3 + parseFloat(0.5)).toFixed(2);
+
+    value4 = platinumData.bid;
+    platinumBuy = (value4).toFixed(2);
+    platinumSell = (value4 + parseFloat(0.5)).toFixed(2);
+
+    console.log(value, value2, value3, value4);
 
     var goldBuyUSD = (goldBuy / 31.103).toFixed(4);
     goldBiddingPrice = (goldBuyUSD * 3.674).toFixed(4);
@@ -97,6 +99,7 @@ async function fetchData() {
 
     // Copper & Platinum
     var copperBuyUSD = (copperBuy / 31.103).toFixed(4);
+
     copperBiddingPrice = (copperBuyUSD * 3.674).toFixed(4);
 
     var copperSellUSD = (copperSell / 31.103).toFixed(4);
@@ -107,6 +110,8 @@ async function fetchData() {
 
     var platinumSellUSD = (platinumSell / 31.103).toFixed(4);
     platiunumAskingPrice = (platinumSellUSD * 3.674).toFixed(4);
+
+   
 }
 
 
@@ -285,21 +290,27 @@ async function readData() {
     const uid = USER_ID;
 
     if (!uid) {
-        console.error('User not authenticated');
-        return Promise.reject('User not authenticated');
+        console.error("User not authenticated");
+        return Promise.reject("User not authenticated");
     }
 
-    const querySnapshot = await getDocs(collection(firestore, `users/${uid}/commodities`));
+    const querySnapshot = await getDocs(
+        collection(firestore, `users/${uid}/commodities`)
+    );
     const result = [];
     querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const timestamp = data.timestamp;
+
         result.push({
             id: doc.id,
-            data: doc.data()
+            data: doc.data(),
+            timestamp: timestamp,
         });
     });
+    result.sort((a, b) => a.timestamp - b.timestamp);
     return result;
 }
-
 
 
 async function showTable() {
@@ -327,7 +338,13 @@ async function showTable() {
             } else if (weightInput === 'TTB') {
                 metal = 'TT BAR'
                 purity = purityInput
-            } else if (weightInput === 'GM') {
+            } else if (weightInput === 'GM' && purityInput === "750") {
+                metal = '18'
+                purity = 'KT'
+            } else if (weightInput === 'GM' && purityInput === "875") {
+                metal = '21'
+                purity = 'KT'
+            } else if (weightInput === 'GM' && purityInput === "916") {
                 metal = '22'
                 purity = 'KT'
             } else {
@@ -352,12 +369,26 @@ async function showTable() {
                 tableBody.insertAdjacentHTML('beforeend', '<tr><td colspan="5" style="height: 0px;"></td></tr>');
             }
 
-            document.getElementById('copperBidTd').textContent = parseInt(copperBiddingPrice * 1000);
-            document.getElementById('copperAskTd').textContent = parseInt(copperAskingPrice * 1000);
-            document.getElementById('platinumBidTd').textContent = parseInt(platinumBiddingPrice * 1000);
-            document.getElementById('platinumAskTd').textContent = parseInt(platiunumAskingPrice * 1000);
+
 
             displaySpreadValues();
+            console.log("++++++++++++++++++++++++");
+
+            console.log(copperBiddingPrice);
+            console.log(copperAskingPrice);
+            console.log(platinumBiddingPrice);
+            console.log(platiunumAskingPrice);
+
+            console.log("--------------------------");
+
+            setInterval(async () => {
+                document.getElementById('copperBidTd').textContent = parseInt(copperBiddingPrice * 1000);
+
+                document.getElementById('copperAskTd').textContent = parseInt(copperAskingPrice * 1000);
+                document.getElementById('platinumBidTd').textContent = parseInt(platinumBiddingPrice * 1000);
+                document.getElementById('platinumAskTd').textContent = parseInt(platiunumAskingPrice * 1000);
+            }, 500)
+
 
             setInterval(async () => {
                 let weight = weightInput;

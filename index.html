@@ -8,11 +8,11 @@
   <title>
     STAR GLITZ
   </title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
   <!-- Link Bootstrap CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <!--     Fonts and icons     -->
   <script src="https://kit.fontawesome.com/0e1fa7c1a3.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
@@ -102,9 +102,9 @@
     }
 
     /* .card-table tbody td {} */
-    .card-table th,
-    .card-table td {
-      padding: 5px;
+    table th,
+    table td {
+      padding: 8px;
       text-align: center;
     }
 
@@ -193,6 +193,71 @@
     <!-- Column -->
     <div class="col-lg-6" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
+      <!-- Table -->
+      <div class="card-table" style="width: 100%; border: 3px solid #CAA462; padding: 14px;">
+        <table>
+          <thead style="margin-bottom: 0px;">
+            <tr>
+              <th colspan="2">COMMODITY</th>
+              <th>UNIT</th>
+              <th>BID (<span id="currencySymbol">AED</span>)</th>
+              <th>ASK (<span id="currencySymbol">AED</span>)</th>
+            </tr>
+            <tr id="blankTr" style="height: 10px;"></tr>
+          </thead>
+
+          <tbody id="tableBodyTV">
+            <!-- Table body content will be dynamically updated here -->
+          </tbody>
+        </table>
+        <table style="margin: 0;">
+          <tbody>
+            <tr id="blankTr" style="height: 7px; border: none;"></tr>
+            <tr style="border: 3px solid #CAA462; ">
+              <td style="text-align: right;">COPPER</td>
+              <td style="text-align: left; font-size:20px;"></td>
+              <td>1 KG</td>
+              <td id="copperBidTd"></td>
+              <td id="copperAskTd"></td>
+            </tr>
+            <tr id="blankTr" style="height: 7px; border: none;"></tr>
+            <tr style="border: 3px solid #CAA462;">
+              <td style="text-align: right;">PLATINUM</td>
+              <td style="text-align: left; font-size:20px;"></td>
+              <td>1 KG</td>
+              <td id="platinumBidTd"></td>
+              <td id="platinumAskTd"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      
+    </div>
+
+    <!-- Column -->
+    <div class="col-lg-6" style="display: flex; flex-direction: column;">
+      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div>
+          <img class="logo" src="./star-glitz.png" alt="" style="width: 200px; margin-top: -30px; margin-left: 0px;">
+        </div>
+
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <div style="display: flex; flex-direction: row;">
+            <span style="color: #CAA462; font-size: 40px; font-weight: 600;" id="hour"></span>
+            <span style="color: #CAA462; font-size: 40px; font-weight: 600; margin: 0px 3px;">:</span>
+            <span style="color: #CAA462; font-size: 40px; font-weight: 600;" id="minute"></span>
+            <span style="color: #CAA462; font-size: 40px; font-weight: 600; margin-left: 8px;" id="meridian"></span>
+          </div>
+          <div style="display: flex; flex-direction: row;">
+            <span style="color: #CAA462; font-size: 20px; font-weight: 500; margin: 0px 4px;" id="day"></span>
+            <span style="color: #CAA462; font-size: 20px; font-weight: 500; margin: 0px 4px;" id="date"></span>
+            <span style="color: #CAA462; font-size: 20px; font-weight: 500; margin: 0px 4px;" id="month"></span>
+            <span style="color: #CAA462; font-size: 20px; font-weight: 500; margin: 0px 4px;" id="year"></span>
+          </div>
+        </div>
+      </div>
+
       <!-- Spot Rate -->
       <div style="padding: 14px; border: 3px solid #CAA462; width: 100%;">
         <div style="display: flex; flex-direction: column; width: 100%;">
@@ -219,48 +284,48 @@
             </div>
             <div style="display: flex; flex-direction: column;">
               <div
-                style="display: flex; flex-direction: row; justify-content: space-between; padding: 25px;  margin-top: 12px; border-radius: 0px; border: 3px solid #CAA462;">
+                style="display: flex; flex-direction: row; justify-content: space-between; padding: 10px 25px;  margin-top: 12px; border-radius: 0px; border: 3px solid #CAA462;">
                 <div style="display: flex; flex-direction: row; align-items: center;">
                   <p style="font-size: 40px; color: #CAA462; font-weight: 600;">Gold</p>
                   <h5 style="font-size: 30px; color: #CAA462;">oz</h5>
                 </div>
                 <div>
                   <div class="" id="goldInputLow"
-                    style="font-size: 2.2vw; width: 180px; background-color: #fff; padding: 10px; font-weight: 600; text-align: center;">
+                    style="font-size: 2.2vw; width: 180px; background-color: #fff; padding: 3px; font-weight: 600; text-align: center;">
                   </div>
                   <label class="badge badge-success label-low mt-1"
-                    style="width: 180px; font-size:21px; background-color: red;">LOW <span
+                    style="width: 180px; font-size:21px; background-color: red; margin: 4px 0px 4px;">LOW <span
                       id="lowLabelGold">0</span></label>
                 </div>
                 <div>
                   <div class="" id="goldInputHigh"
-                    style="font-size: 2.2vw; width: 180px; background-color: #fff; padding: 10px; font-weight: 600; text-align: center;">
+                    style="font-size: 2.2vw; width: 180px; background-color: #fff; padding: 3px; font-weight: 600; text-align: center;">
                   </div>
                   <label class="badge badge-success label-low mt-1"
-                    style="width: 180px; font-size:21px; background-color: green;">HIGH <span
+                    style="width: 180px; font-size:21px; background-color: green; margin: 4px 0px 4px;">HIGH <span
                       id="highLabelGold">0</span></label>
                 </div>
               </div>
               <div
-                style="display: flex; flex-direction: row; justify-content: space-between; padding: 25px;  margin-top: 18px; border-radius: 0px; border: 3px solid #CAA462;">
+                style="display: flex; flex-direction: row; justify-content: space-between; padding: 10px 25px;  margin-top: 18px; border-radius: 0px; border: 3px solid #CAA462;">
                 <div style="display: flex; flex-direction: row; align-items: center;">
                   <p style="font-size: 35px; color: #CAA462; font-weight: 600;">Silver</p>
                   <h5 style="font-size: 25px; color: #CAA462;">oz</h5>
                 </div>
                 <div>
                   <div class="" id="silverInputLow"
-                    style="font-size: 2.2vw; width: 180px; background-color: #fff; padding: 15px; font-weight: 600; text-align: center;">
+                    style="font-size: 2.2vw; width: 180px; background-color: #fff; padding: 3px; font-weight: 600; text-align: center;">
                   </div>
                   <label class="badge badge-success label-low mt-1"
-                    style="width: 180px; font-size:21px; background-color: red;">LOW <span
+                    style="width: 180px; font-size:21px; background-color: red; margin: 4px 0px 4px;">LOW <span
                       id="lowLabelSilver">0</span></label>
                 </div>
                 <div>
                   <div class="" id="silverInputHigh"
-                    style="font-size: 2.2vw; width: 180px; background-color: #fff; padding: 15px; font-weight: 600; text-align: center;">
+                    style="font-size: 2.2vw; width: 180px; background-color: #fff; padding: 3px; font-weight: 600; text-align: center;">
                   </div>
                   <label class="badge badge-success label-low mt-1"
-                    style="width: 180px; font-size:21px; background-color: green;">HIGH <span
+                    style="width: 180px; font-size:21px; background-color: green; margin: 4px 0px 4px;">HIGH <span
                       id="highLabelSilver">0</span></label>
                 </div>
               </div>
@@ -273,67 +338,7 @@
       <div class="carousel-container mt-3">
         <img id="carouselImage" src="./assets/images/image1.jpg" alt="">
       </div>
-    </div>
 
-    <!-- Column -->
-    <div class="col-lg-6" style="display: flex; flex-direction: column;">
-      <div style="display: flex; flex-direction: row; justify-content: space-between;">
-        <div>
-          <img class="logo" src="./star-glitz.png" alt="" style="width: 200px; margin-top: -30px; margin-left: 0px;">
-        </div>
-
-        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-          <div style="display: flex; flex-direction: row;">
-            <span style="color: #CAA462; font-size: 40px; font-weight: 600;" id="hour"></span>
-            <span style="color: #CAA462; font-size: 40px; font-weight: 600; margin: 0px 3px;">:</span>
-            <span style="color: #CAA462; font-size: 40px; font-weight: 600;" id="minute"></span>
-            <span style="color: #CAA462; font-size: 40px; font-weight: 600; margin-left: 8px;" id="meridian"></span>
-          </div>
-          <div style="display: flex; flex-direction: row;">
-            <span style="color: #CAA462; font-size: 20px; font-weight: 500; margin: 0px 4px;" id="day"></span>
-            <span style="color: #CAA462; font-size: 20px; font-weight: 500; margin: 0px 4px;" id="date"></span>
-            <span style="color: #CAA462; font-size: 20px; font-weight: 500; margin: 0px 4px;" id="month"></span>
-            <span style="color: #CAA462; font-size: 20px; font-weight: 500; margin: 0px 4px;" id="year"></span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Table -->
-      <div class="card-table" style="width: 100%; border: 3px solid #CAA462; padding: 14px;">
-        <table>
-          <thead style="margin-bottom: 0px;">
-            <tr>
-              <th colspan="2">COMMODITY</th>
-              <th>UNIT</th>
-              <th>BID (<span id="currencySymbol">AED</span>)</th>
-              <th>ASK (<span id="currencySymbol">AED</span>)</th>
-            </tr>
-            <tr id="blankTr" style="height: 10px;"></tr>
-          </thead>
-
-          <tbody id="tableBodyTV">
-            <!-- Table body content will be dynamically updated here -->
-          </tbody>
-          <tbody class="silver-table">
-            <tr id="blankTr" style="height: 7px; border: none;"></tr>
-            <tr style="border: 3px solid #CAA462;">
-              <td style="text-align: right;">Copper</td>
-              <td style="text-align: left; font-size:28px;"></td>
-              <td>1 KG</td>
-              <td id="copperBidTd"></td>
-              <td id="copperAskTd"></td>
-            </tr>
-            <tr id="blankTr" style="height: 7px; border: none;"></tr>
-            <tr style="border: 3px solid #CAA462;">
-              <td style="text-align: right;">Platinum</td>
-              <td style="text-align: left; font-size:28px;"></td>
-              <td>1 KG</td>
-              <td id="platinumBidTd"></td>
-              <td id="platinumAskTd"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
   </div>
 
@@ -414,7 +419,7 @@
         var curYear = today.getFullYear();
         var date = curDay;
         var day = curWeekDay;
-        console.log(curDay, curMonth, curWeekDay, curYear);
+        // console.log(curDay, curMonth, curWeekDay, curYear);
         document.getElementById("month").innerHTML = curMonth;
         // document.getElementById("currentDay").innerHTML = curDay;
         document.getElementById("year").innerHTML = curYear;
@@ -464,11 +469,11 @@
       window.location.href = '../../../pages/error.html'; // Redirect to a mobile error page
     }
   </script>
+  <script type="module" defer src="./assets/js/core/aurifyview2.js"></script>
   <script src="https://unpkg.com/metaapi.cloud-sdk"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js"></script>
-  <script type="module" defer src="./assets/js/core/aurifyview2.js"></script>
   <script type="module" src="./config/db.js"></script>
   <script type="module" src="./assets/js/core/spotrateDB.js"></script>
   <script type="module" defer src="./assets/js/core/displayNews.js"></script>
