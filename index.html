@@ -22,7 +22,7 @@
       font-family: "arial", heletica, sans-serif;
       font-size: 24px;
       /*       background: url('./Red-Background.jpg'); */
-      background-color: black;
+      background-color: #500404;
       background-repeat: no-repeat;
       background-size: cover;
       -webkit-animation: 20s linear 0s normal none infinite animate;
@@ -88,7 +88,7 @@
     .card-table tbody tr:nth-child(even) {
       background-color: transparent;
       box-shadow: none;
-      border: none;                                                                                                                                                    
+      border: none;
     }
 
     .card-table tbody tr {
@@ -189,51 +189,6 @@
 <body>
   <div class="col-lg-12" style="display: flex; flex-direction: row; justify-content: space-between;">
 
-
-    <!-- Column -->
-    <div class="col-lg-6" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-
-      <!-- Table -->
-      <div class="card-table" style="width: 100%; border: 3px solid #CAA462; padding: 14px;">
-        <table>
-          <thead style="margin-bottom: 0px;">
-            <tr>
-              <th colspan="2">COMMODITY</th>
-              <th>UNIT</th>
-              <th>BID (<span id="currencySymbol">AED</span>)</th>
-              <th>ASK (<span id="currencySymbol">AED</span>)</th>
-            </tr>
-            <tr id="blankTr" style="height: 10px;"></tr>
-          </thead>
-
-          <tbody id="tableBodyTV">
-            <!-- Table body content will be dynamically updated here -->
-          </tbody>
-        </table>
-        <table style="margin: 0;">
-          <tbody>
-            <tr id="blankTr" style="height: 7px; border: none;"></tr>
-            <tr style="border: 3px solid #CAA462; ">
-              <td style="text-align: right;">COPPER</td>
-              <td style="text-align: left; font-size:20px;"></td>
-              <td>1 KG</td>
-              <td id="copperBidTd"></td>
-              <td id="copperAskTd"></td>
-            </tr>
-            <tr id="blankTr" style="height: 7px; border: none;"></tr>
-            <tr style="border: 3px solid #CAA462;">
-              <td style="text-align: right;">PLATINUM</td>
-              <td style="text-align: left; font-size:20px;"></td>
-              <td>1 KG</td>
-              <td id="platinumBidTd"></td>
-              <td id="platinumAskTd"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      
-    </div>
 
     <!-- Column -->
     <div class="col-lg-6" style="display: flex; flex-direction: column;">
@@ -338,6 +293,51 @@
       <div class="carousel-container mt-3">
         <img id="carouselImage" src="./assets/images/image1.jpg" alt="">
       </div>
+
+    </div>
+
+    <!-- Column -->
+    <div class="col-lg-6" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+      <!-- Table -->
+      <div class="card-table" style="width: 100%; border: 3px solid #CAA462; padding: 14px;">
+        <table>
+          <thead style="margin-bottom: 0px;">
+            <tr>
+              <th colspan="2">COMMODITY</th>
+              <th>UNIT</th>
+              <th>BID (<span id="currencySymbol">AED</span>)</th>
+              <th>ASK (<span id="currencySymbol">AED</span>)</th>
+            </tr>
+            <tr id="blankTr" style="height: 10px;"></tr>
+          </thead>
+
+          <tbody id="tableBodyTV">
+            <!-- Table body content will be dynamically updated here -->
+          </tbody>
+        </table>
+        <table style="margin: 0;">
+          <tbody>
+            <tr id="blankTr" style="height: 7px; border: none;"></tr>
+            <tr style="border: 3px solid #CAA462; ">
+              <td style="text-align: right;">COPPER</td>
+              <td style="text-align: left; font-size:20px;"></td>
+              <td>1 KG</td>
+              <td id="copperBidTd"></td>
+              <td id="copperAskTd"></td>
+            </tr>
+            <tr id="blankTr" style="height: 7px; border: none;"></tr>
+            <tr style="border: 3px solid #CAA462;">
+              <td style="text-align: right;">PLATINUM</td>
+              <td style="text-align: left; font-size:20px;"></td>
+              <td>1 KG</td>
+              <td id="platinumBidTd"></td>
+              <td id="platinumAskTd"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
 
     </div>
   </div>
