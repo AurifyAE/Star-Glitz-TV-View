@@ -43,7 +43,6 @@ let copperData = {}
 let platinumData = {}
 
 async function fetchData() {
-    console.log('ll');
     let value, value2, value3, value4;
 
     socket.on('market-data', (data) => {
@@ -82,7 +81,6 @@ async function fetchData() {
     platinumBuy = (value4).toFixed(2);
     platinumSell = (value4 + parseFloat(0.5)).toFixed(2);
 
-    console.log(value, value2, value3, value4);
 
     var goldBuyUSD = (goldBuy / 31.103).toFixed(4);
     goldBiddingPrice = (goldBuyUSD * 3.674).toFixed(4);
@@ -109,9 +107,7 @@ async function fetchData() {
     platinumBiddingPrice = (platinumBuyUSD * 3.674).toFixed(4);
 
     var platinumSellUSD = (platinumSell / 31.103).toFixed(4);
-    platiunumAskingPrice = (platinumSellUSD * 3.674).toFixed(4);
-
-   
+    platiunumAskingPrice = (platinumSellUSD * 3.674).toFixed(4); 
 }
 
 
@@ -381,9 +377,8 @@ async function showTable() {
 
             console.log("--------------------------");
 
-            setInterval(async () => {
+            setInterval(() => {
                 document.getElementById('copperBidTd').textContent = parseInt(copperBiddingPrice * 1000);
-
                 document.getElementById('copperAskTd').textContent = parseInt(copperAskingPrice * 1000);
                 document.getElementById('platinumBidTd').textContent = parseInt(platinumBiddingPrice * 1000);
                 document.getElementById('platinumAskTd').textContent = parseInt(platiunumAskingPrice * 1000);
